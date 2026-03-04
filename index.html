@@ -2,18 +2,19 @@
 <html lang="zh-CN">
 
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>短视频平台创作者中心导航</title>
 
+<link rel="stylesheet" href="/assets/css/main.css">
+
 <link rel="stylesheet" href="https://cdn.anssl.cn/bootstrap/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="https://cdn.anssl.cn/bootstrap-icons/font/bootstrap-icons.min.css">
 
 <style>
-
-body{
-background:#f8f9fa;
-}
 
 #member{
 display:grid;
@@ -24,52 +25,26 @@ gap:2rem;
 .box{
 cursor:pointer;
 padding:1rem;
-border-radius:10px;
-background:white;
-border:1px solid #eee;
-transition:.2s;
+border-radius:.5rem;
+border:1px solid #dee2e6;
+transition:.15s;
 }
 
 .box:hover{
 transform:translateY(-2px);
-box-shadow:0 4px 10px rgba(0,0,0,.08);
 }
 
 .box.active{
 background:#198754;
-color:white;
-box-shadow:0 6px 14px rgba(0,0,0,.15);
+color:#fff;
 }
 
 .box.active a{
-color:white;
+color:#fff;
 }
 
 .box img{
 height:3rem;
-}
-
-a{
-text-decoration:none;
-}
-
-a:focus{
-outline:none;
-}
-
-.shortcut{
-text-align:center;
-margin-top:60px;
-color:#666;
-font-size:14px;
-}
-
-kbd{
-background:#f1f3f5;
-border:1px solid #ddd;
-border-radius:6px;
-padding:4px 8px;
-font-size:12px;
 }
 
 </style>
@@ -79,29 +54,57 @@ font-size:12px;
 
 <body>
 
+
 <div class="container py-5">
+
 
 <h3 class="text-center mb-5">短视频平台创作者中心导航</h3>
 
+
 <div id="member"></div>
 
-<div class="shortcut">
-使用
-<kbd>↑</kbd>
-<kbd>↓</kbd>
-<kbd>←</kbd>
-<kbd>→</kbd>
-选择平台，
-<kbd>Enter</kbd>
-打开
+
+
+<div class="text-center pt-5 mb-3">
+
+
+<span class="lead px-2">键盘</span>
+
+
+<div class="d-inline-flex flex-column align-items-center mx-2">
+
+<div>
+<kbd><i class="bi bi-arrow-up"></i></kbd>
+</div>
+
+<div class="pt-1">
+<kbd><i class="bi bi-arrow-left"></i></kbd>
+<kbd><i class="bi bi-arrow-down"></i></kbd>
+<kbd><i class="bi bi-arrow-right"></i></kbd>
 </div>
 
 </div>
+
+
+<span class="lead px-2">选择，</span>
+
+
+<kbd>Enter</kbd>
+
+<span class="lead px-2">键确认</span>
+
+
+</div>
+
+
+</div>
+
 
 
 <script>
 
-const platforms = [
+
+const platforms=[
 
 {
 name:"抖音",
@@ -118,7 +121,7 @@ icon:"/assets/image/kuaishou.svg"
 {
 name:"小红书",
 url:"https://creator.xiaohongshu.com/",
-icon:"/assets/image/xiaohongshu.svg"
+icon:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAABgCAYAAAC+PvZZAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAA0KSURBVHgB7Z1LbFTXGce/cz1UlRKc6SqRghRLmAq6Cd0EKa2UwZC2uwRYFhV7SwWEVApSUxW7UqTSRXlYTdVsakdtd7y6ahMeU6lZkE1gA6iA4kog0Z1rg1SBZ07P/94Zezy+j+8+z70z3w+ZGY+vZ65n7v98z3OO..."
 },
 
 {
@@ -136,15 +139,14 @@ icon:"/assets/image/bilibili.svg"
 ]
 
 
-const container = document.getElementById("member")
+const container=document.getElementById("member")
 
 
 platforms.forEach(p=>{
 
 container.insertAdjacentHTML("beforeend",
 
-`
-<div class="box">
+`<div class="box">
 
 <div class="d-flex align-items-center">
 
@@ -152,26 +154,31 @@ container.insertAdjacentHTML("beforeend",
 
 <div>
 
-<a href="${p.url}" target="_blank">
+<a class="icon-link icon-link-hover link-body-emphasis" href="${p.url}" target="_blank">
+
 <strong>${p.name}</strong>
 <small class="ms-2">创作者中心</small>
+
+<i class="bi bi-box-arrow-up-right"></i>
+
 </a>
 
 </div>
 
 </div>
 
-</div>
-`
+</div>`
 
 )
 
 })
 
 
-const items = document.querySelectorAll(".box")
 
-let index = 0
+const items=document.querySelectorAll(".box")
+
+let index=0
+
 
 
 function select(i){
@@ -188,26 +195,27 @@ items[i].querySelector("a").focus()
 select(index)
 
 
+
 window.addEventListener("keydown",e=>{
 
-const cols = Math.floor(container.offsetWidth / items[0].offsetWidth)
+const cols=Math.floor(container.offsetWidth/items[0].offsetWidth)
 
 switch(e.key){
 
 case "ArrowRight":
-index = (index + 1) % items.length
+index=(index+1)%items.length
 break
 
 case "ArrowLeft":
-index = (index - 1 + items.length) % items.length
+index=(index-1+items.length)%items.length
 break
 
 case "ArrowDown":
-index = (index + cols) % items.length
+index=(index+cols)%items.length
 break
 
 case "ArrowUp":
-index = (index - cols + items.length) % items.length
+index=(index-cols+items.length)%items.length
 break
 
 case "Enter":
@@ -223,7 +231,10 @@ select(index)
 
 })
 
+
 </script>
+
+
 
 </body>
 </html>
